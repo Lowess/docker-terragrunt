@@ -1,4 +1,4 @@
-FROM hashicorp/terraform:0.12.24
+FROM hashicorp/terraform:0.12.29
 
 ENV AWS_SDK_LOAD_CONFIG=1 \
     TERRAGRUNT_VERSION=0.23.10 \
@@ -6,12 +6,12 @@ ENV AWS_SDK_LOAD_CONFIG=1 \
     TERRAFORM_PLUGIN_DIR=/opt/.terraform.d/plugins \
     TERRAFORM_PLUGIN_URL=https://releases.hashicorp.com/ \
     TERRAFORM_PLUGINS="\
-        aws:2.64.0 \
+        aws:3.3.0 \
         grafana:1.5.0 \
         null:2.1.2 \
-        postgresql:1.6.0 \
-        spotinst:1.16.0 \
-        random:2.2.1 \
+        postgresql:1.7.1 \
+        spotinst:1.24.0 \
+        random:2.3.0 \
         template:2.1.2" \
     CREDSTASH_PROVIDER_VERSION=0.4.1 \
     PREFIX=/usr/local/bin \
