@@ -1,5 +1,6 @@
-FROM hashicorp/terraform:0.12.29
+FROM hashicorp/terraform:0.12.31
 
+ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 ENV AWS_SDK_LOAD_CONFIG=1 \
     TERRAGRUNT_VERSION=0.23.10 \
     TERRAFORM_PLUGIN_ARCH=linux_amd64 \
@@ -10,7 +11,7 @@ ENV AWS_SDK_LOAD_CONFIG=1 \
         grafana:1.5.0 \
         null:2.1.2 \
         postgresql:1.7.1 \
-        spotinst:1.24.0 \
+        spotinst:1.27.0 \
         random:2.3.0 \
         template:2.1.2" \
     CREDSTASH_PROVIDER_VERSION=0.4.1 \
@@ -18,7 +19,7 @@ ENV AWS_SDK_LOAD_CONFIG=1 \
     PATH="/usr/local/bin:${PATH}"
 
 RUN apk update && \
-    apk add coreutils file curl jq vim
+    apk add coreutils file curl jq vim gnupg groff
 
 # Install Terragrunt
 RUN mkdir -p "${PREFIX}" \
@@ -41,10 +42,10 @@ RUN mkdir -p "${TERRAFORM_PLUGIN_DIR}/${TERRAFORM_PLUGIN_ARCH}" \
 
 
 # Install Python and Credstash
-RUN apk --no-cache add bash py-pip python python-dev python3 python3-dev build-base libffi-dev openssl-dev && \
-    pip install cffi==1.11.3 && \
-    pip install credstash==1.14.0 && \
-    pip install awscli==1.18.45
+RUN apk --no-cache add bash py-pip g++ python3 python3-dev build-base libffi-dev openssl-dev && \
+    pip install cffi==1.14.2 && \
+    pip install credstash==1.17.1 && \
+    pip install awscli==1.18.223
 
 COPY aliases.sh /etc/profile.d/
 COPY .terraformrc /root/.terraformrc
