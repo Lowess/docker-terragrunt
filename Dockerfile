@@ -1,13 +1,13 @@
-FROM hashicorp/terraform:0.12.31
+FROM hashicorp/terraform:0.13.7
 
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 ENV AWS_SDK_LOAD_CONFIG=1 \
-    TERRAGRUNT_VERSION=0.23.10 \
+    TERRAGRUNT_VERSION=0.26.7 \
     TERRAFORM_PLUGIN_ARCH=linux_amd64 \
     TERRAFORM_PLUGIN_DIR=/opt/.terraform.d/plugins \
     TERRAFORM_PLUGIN_URL=https://releases.hashicorp.com/ \
     TERRAFORM_PLUGINS="\
-        aws:3.3.0 \
+        aws:3.64.2 \
         grafana:1.5.0 \
         null:2.1.2 \
         postgresql:1.7.1 \
@@ -43,6 +43,7 @@ RUN mkdir -p "${TERRAFORM_PLUGIN_DIR}/${TERRAFORM_PLUGIN_ARCH}" \
 
 # Install Python and Credstash
 RUN apk --no-cache add bash py-pip g++ python3 python3-dev build-base libffi-dev openssl-dev && \
+    pip install -U pip \
     pip install cffi==1.14.2 && \
     pip install credstash==1.17.1 && \
     pip install awscli==1.18.223
