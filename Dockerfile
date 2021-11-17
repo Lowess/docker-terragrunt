@@ -1,8 +1,8 @@
-FROM hashicorp/terraform:0.13.7
+FROM hashicorp/terraform:0.14.11
 
 ENV CRYPTOGRAPHY_DONT_BUILD_RUST=1
 ENV AWS_SDK_LOAD_CONFIG=1 \
-    TERRAGRUNT_VERSION=0.26.7 \
+    TERRAGRUNT_VERSION=0.28.24 \
     TERRAFORM_PLUGIN_ARCH=linux_amd64 \
     TERRAFORM_PLUGIN_DIR=/opt/.terraform.d/plugins \
     TERRAFORM_PLUGIN_URL=https://releases.hashicorp.com/ \
