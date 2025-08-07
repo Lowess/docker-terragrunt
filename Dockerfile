@@ -19,7 +19,7 @@ ENV AWS_SDK_LOAD_CONFIG=1 \
     PATH="/usr/local/bin:${PATH}"
 
 RUN apk update && \
-    apk add coreutils file curl jq vim gnupg groff
+    apk --upgrade add coreutils file curl jq vim gnupg groff
 
 # Install Terragrunt
 RUN mkdir -p "${PREFIX}" \
@@ -43,7 +43,7 @@ RUN mkdir -p "${TERRAFORM_PLUGIN_DIR}/${TERRAFORM_PLUGIN_ARCH}" \
 
 # Install Python and Credstash
 RUN apk --no-cache add bash py-pip g++ python3 python3-dev build-base libffi-dev openssl-dev && \
-    pip install -U pip \
+    pip install -U pip && \
     pip install cffi==1.14.2 && \
     pip install credstash==1.17.1 && \
     pip install awscli==1.18.223
